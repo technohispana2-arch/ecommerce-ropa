@@ -12,6 +12,8 @@ export default function ProductDetail() {
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [qty, setQty] = useState(1);
+  const [timeLeft, setTimeLeft] = useState(null);
+  const [timerExpired, setTimerExpired] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -28,6 +30,40 @@ export default function ProductDetail() {
     };
     fetchProduct();
   }, [id]);
+
+  useEffect(() => {
+    const storageKey = `offer_timer_${id}`;
+    const savedEndTime = localStorage.getItem(storageKey);
+
+    let endTime;
+    if (savedEndTime) {
+      endTime = parseInt(savedEndTime);
+    } else {
+      endTime = Date.now() + 15 * 60 * 1000;
+      localStorage.setItem(storageKey, endTime.toString());
+    }
+
+    const updateTimer = () => {
+      const diff = endTime - Date.now();
+      if (diff <= 0) {
+        setTimeLeft(0);
+        setTimerExpired(true);
+        return;
+      }
+      setTimeLeft(diff);
+    };
+
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+    return () => clearInterval(interval);
+  }, [id]);
+
+  const formatTime = (ms) => {
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
 
   if (loading) {
     return (
@@ -162,6 +198,28 @@ export default function ProductDetail() {
           >
             {product.stock === 0 ? 'Agotado' : 'Agregar al Carrito'}
           </button>
+
+          {!timerExpired && timeLeft !== null && (
+            <div className="mt-4 text-center p-3 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-sm text-red-600 font-semibold mb-1">
+                ⚡ OFERTA POR TIEMPO LIMITADO
+              </p>
+              <div className="text-2xl font-bold text-red-600 font-mono">
+                {formatTime(timeLeft)}
+              </div>
+              <p className="text-xs text-gray-500 mt-1">
+                ¡Solo {product.stock} unidades disponibles!
+              </p>
+            </div>
+          )}
+
+          {timerExpired && (
+            <div className="mt-4 text-center p-3 bg-gray-50 border border-gray-200 rounded-lg">
+              <p className="text-sm text-gray-600">
+                ⏰ La oferta ha expirado. El precio puede cambiar pronto.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
