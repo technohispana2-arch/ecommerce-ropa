@@ -1,3 +1,7 @@
+/**
+ * Página de proceso de pago
+ * Formulario de dirección, método de pago, crea orden
+ */
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';

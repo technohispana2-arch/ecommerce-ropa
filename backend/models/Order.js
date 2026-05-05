@@ -1,3 +1,8 @@
+/**
+ * Modelo de Pedido
+ * Relaciona User con productos comprados (orderItems)
+ * Campos: user, orderItems, shippingAddress, paymentMethod, paymentResult, precios, estados (isPaid, isDelivered)
+ */
 const mongoose = require('mongoose');
 
 const orderSchema = mongoose.Schema(

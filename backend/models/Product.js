@@ -1,3 +1,8 @@
+/**
+ * Modelo de Producto (ropa)
+ * Campos: name, description, price, images, category, sizes, colors, brand, stock, rating, numReviews
+ * Categorías válidas: camisetas, pantalones, vestidos, faldas, chaquetas, zapatos, accesorios
+ */
 const mongoose = require('mongoose');
 
 const productSchema = mongoose.Schema(

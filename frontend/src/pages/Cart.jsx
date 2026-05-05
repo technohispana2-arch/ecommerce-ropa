@@ -1,3 +1,7 @@
+/**
+ * Página del carrito de compras
+ * Lista items, permite modificar cantidad, muestra resumen del pedido
+ */
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';

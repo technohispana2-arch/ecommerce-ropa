@@ -1,3 +1,7 @@
+/**
+ * Página de inicio
+ * Muestra: hero, categorías, productos destacados
+ */
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getProducts, getCategories } from '../utils/api';

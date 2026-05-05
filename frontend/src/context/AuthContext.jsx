@@ -1,3 +1,8 @@
+/**
+ * Contexto de autenticación
+ * Provee: user, loading, login, register, logout
+ * Conserva sesión en localStorage
+ */
 import { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -7,6 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Restaura sesión desde localStorage al iniciar
   useEffect(() => {
     const userInfo = localStorage.getItem('userInfo');
     if (userInfo) {
@@ -15,6 +21,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
+  // Login: POST /api/users/login
   const login = async (email, password) => {
     const config = {
       headers: { 'Content-Type': 'application/json' },
@@ -29,6 +36,7 @@ export const AuthProvider = ({ children }) => {
     return data;
   };
 
+  // Register: POST /api/users/register
   const register = async (name, email, password) => {
     const config = {
       headers: { 'Content-Type': 'application/json' },
@@ -43,6 +51,7 @@ export const AuthProvider = ({ children }) => {
     return data;
   };
 
+  // Logout: limpia localStorage
   const logout = () => {
     localStorage.removeItem('userInfo');
     setUser(null);

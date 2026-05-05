@@ -1,3 +1,7 @@
+/**
+ * Rutas de /api/users
+ * Endpoints: login, register, profile (auth), CRUD usuarios (admin)
+ */
 const express = require('express');
 const router = express.Router();
 const { protect, admin } = require('../middleware/auth');

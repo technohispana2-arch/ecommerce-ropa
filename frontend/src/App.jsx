@@ -1,3 +1,7 @@
+/**
+ * Componente raíz de la aplicación
+ * Configura Providers (Auth, Cart), Router y rutas
+ */
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';

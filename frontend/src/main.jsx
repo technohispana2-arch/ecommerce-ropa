@@ -1,3 +1,7 @@
+/**
+ * Punto de entrada de React
+ * Monta App en el elemento #root
+ */
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'

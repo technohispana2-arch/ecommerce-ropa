@@ -1,8 +1,11 @@
+/**
+ * Panel de administración
+ * CRUD de productos (solo admin)
+ */
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { getProducts, getCategories } from '../utils/api';
-import ProductCard from '../components/ProductCard';
+import { getProducts } from '../utils/api';
 
 export default function AdminDashboard() {
   const { user } = useAuth();

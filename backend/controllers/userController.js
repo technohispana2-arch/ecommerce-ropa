@@ -1,12 +1,18 @@
+/**
+ * Controlador de Usuarios
+ * Funciones: registerUser, authUser, getUserProfile, getUsers, deleteUser, updateUser
+ */
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
+// Genera JWT con id y isAdmin, expira en 30 días
 const generateToken = (id, isAdmin) => {
   return jwt.sign({ id, isAdmin }, process.env.JWT_SECRET, {
     expiresIn: '30d',
   });
 };
 
+// Registro de nuevo usuario
 const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -38,6 +44,7 @@ const registerUser = async (req, res) => {
   }
 };
 
+// Autenticación (login)
 const authUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -60,6 +67,7 @@ const authUser = async (req, res) => {
   }
 };
 
+// Obtener perfil del usuario actual
 const getUserProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
@@ -73,6 +81,7 @@ const getUserProfile = async (req, res) => {
   }
 };
 
+// Listar todos los usuarios (solo admin)
 const getUsers = async (req, res) => {
   try {
     const users = await User.find({}).select('-password');
@@ -82,6 +91,7 @@ const getUsers = async (req, res) => {
   }
 };
 
+// Eliminar usuario por ID (solo admin)
 const deleteUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -96,6 +106,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// Actualizar usuario (solo admin)
 const updateUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);

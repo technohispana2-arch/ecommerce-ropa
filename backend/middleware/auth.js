@@ -1,3 +1,8 @@
+/**
+ * Middleware de autenticación JWT
+ * protect: verifica token y añade req.user
+ * admin: verifica que req.user.isAdmin sea true
+ */
 const jwt = require('jsonwebtoken');
 
 const protect = (req, res, next) => {
