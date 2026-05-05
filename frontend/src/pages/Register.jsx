@@ -1,3 +1,7 @@
+/**
+ * Página de registro de usuario
+ * Formulario: name, email, password, confirmPassword
+ */
 import { useState } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';

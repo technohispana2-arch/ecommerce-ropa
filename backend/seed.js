@@ -1,3 +1,7 @@
+/**
+ * Script para sembrar la base de datos con productos de ejemplo
+ * Ejecutar con: node seed.js
+ */
 require('dotenv').config();
 const mongoose = require('mongoose');
 const Product = require('./models/Product');

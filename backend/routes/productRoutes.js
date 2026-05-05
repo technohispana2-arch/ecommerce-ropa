@@ -1,3 +1,7 @@
+/**
+ * Rutas de /api/products
+ * Endpoints: listar, crear, actualizar, eliminar productos (admin), listar categorías
+ */
 const express = require('express');
 const router = express.Router();
 const { protect, admin } = require('../middleware/auth');

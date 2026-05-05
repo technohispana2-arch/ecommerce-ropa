@@ -1,3 +1,8 @@
+/**
+ * Modelo de Usuario para MongoDB
+ * Campos: name, email, password, isAdmin
+ * Métodos: matchPassword (compara contraseña), pre-save hashea la password
+ */
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -28,10 +33,12 @@ const userSchema = mongoose.Schema(
   }
 );
 
+// Compara contraseña ingresada con la hasheada
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
+// Hashea password antes de guardar si fue modificada
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     next();

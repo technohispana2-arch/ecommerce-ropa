@@ -1,3 +1,7 @@
+/**
+ * Página de detalle de producto
+ * Muestra: imagen, descripción, tallas, colores, precio con timer de oferta
+ */
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getProductById } from '../utils/api';
@@ -31,6 +35,7 @@ export default function ProductDetail() {
     fetchProduct();
   }, [id]);
 
+  // Timer de oferta (15 min)
   useEffect(() => {
     const storageKey = `offer_timer_${id}`;
     const savedEndTime = localStorage.getItem(storageKey);
@@ -199,6 +204,7 @@ export default function ProductDetail() {
             {product.stock === 0 ? 'Agotado' : 'Agregar al Carrito'}
           </button>
 
+          {/* Offer Timer */}
           {!timerExpired && timeLeft !== null && (
             <div className="mt-4 text-center p-3 bg-red-50 border border-red-200 rounded-lg">
               <p className="text-sm text-red-600 font-semibold mb-1">

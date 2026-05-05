@@ -1,3 +1,7 @@
+/**
+ * Página del catálogo
+ * Lista productos con paginación y filtros por categoría
+ */
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getProducts, getCategories } from '../utils/api';

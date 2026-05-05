@@ -1,3 +1,7 @@
+/**
+ * Conexión a MongoDB usando Mongoose
+ * Lee la URI desde process.env.MONGO_URI
+ */
 const mongoose = require('mongoose');
 
 const connectDB = async () => {

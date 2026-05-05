@@ -1,3 +1,7 @@
+/**
+ * Rutas de /api/orders
+ * Endpoints: crear, listar mis pedidos, marcar pagado, marcar entregado (admin)
+ */
 const express = require('express');
 const router = express.Router();
 const { protect, admin } = require('../middleware/auth');

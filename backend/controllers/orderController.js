@@ -1,5 +1,10 @@
+/**
+ * Controlador de Pedidos
+ * Funciones: createOrder, getOrderById, updateOrderToPaid, updateOrderToDelivered, getMyOrders, getOrders
+ */
 const Order = require('../models/Order');
 
+// Crear nuevo pedido
 const createOrder = async (req, res) => {
   try {
     const {
@@ -35,6 +40,7 @@ const createOrder = async (req, res) => {
   }
 };
 
+// Obtener pedido por ID
 const getOrderById = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id).populate(
@@ -52,6 +58,7 @@ const getOrderById = async (req, res) => {
   }
 };
 
+// Marcar pedido como pagado
 const updateOrderToPaid = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
@@ -76,6 +83,7 @@ const updateOrderToPaid = async (req, res) => {
   }
 };
 
+// Marcar pedido como entregado (solo admin)
 const updateOrderToDelivered = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
@@ -94,6 +102,7 @@ const updateOrderToDelivered = async (req, res) => {
   }
 };
 
+// Listar pedidos del usuario actual
 const getMyOrders = async (req, res) => {
   try {
     const orders = await Order.find({ user: req.user.id });
@@ -103,6 +112,7 @@ const getMyOrders = async (req, res) => {
   }
 };
 
+// Listar todos los pedidos (solo admin)
 const getOrders = async (req, res) => {
   try {
     const orders = await Order.find({}).populate('user', 'id name');

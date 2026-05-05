@@ -1,10 +1,17 @@
+/**
+ * Contexto del carrito de compras
+ * Provee: items, total, addToCart, removeFromCart, updateQty, clearCart
+ * Persiste en localStorage
+ */
 import { createContext, useContext, useReducer, useEffect } from 'react';
 
 const CartContext = createContext();
 
+// Reducer: maneja estado del carrito
 const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_ITEM': {
+      // Verifica si el producto ya existe (misma ID, size, color)
       const existingItem = state.items.find(
         (item) =>
           item._id === action.payload._id &&
@@ -68,6 +75,7 @@ const cartReducer = (state, action) => {
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, { items: [], total: 0 });
 
+  // Restaura carrito desde localStorage al iniciar
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
@@ -75,10 +83,12 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
+  // Guarda carrito en localStorage al cambiar
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(state));
   }, [state]);
 
+  // Añade producto al carrito
   const addToCart = (product, qty, size, color) => {
     const cartId = `${product._id}-${size}-${color}`;
     dispatch({
@@ -96,14 +106,17 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  // Elimina producto del carrito
   const removeFromCart = (cartId) => {
     dispatch({ type: 'REMOVE_ITEM', payload: cartId });
   };
 
+  // Actualiza cantidad
   const updateQty = (cartId, qty) => {
     dispatch({ type: 'UPDATE_QTY', payload: { cartId, qty } });
   };
 
+  // Vacía el carrito
   const clearCart = () => {
     dispatch({ type: 'CLEAR_CART' });
   };

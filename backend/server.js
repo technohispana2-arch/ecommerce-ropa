@@ -1,3 +1,7 @@
+/**
+ * Punto de entrada del servidor Express
+ * Configura la app, conecta a MongoDB y define las rutas de API
+ */
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -14,10 +18,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Rutas de la API
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 
+// Manejador de errores global
 app.use((err, req, res, next) => {
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   res.status(statusCode).json({

@@ -1,3 +1,7 @@
+/**
+ * Página de historial de pedidos del usuario
+ * Lista pedidos con estado (pagado, entregado)
+ */
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';

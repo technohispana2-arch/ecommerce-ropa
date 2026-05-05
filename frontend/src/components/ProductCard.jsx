@@ -1,3 +1,7 @@
+/**
+ * Tarjeta de producto para el catálogo
+ * Muestra: imagen, nombre, precio, rating, tallas
+ */
 import { Link } from 'react-router-dom';
 
 export default function ProductCard({ product }) {

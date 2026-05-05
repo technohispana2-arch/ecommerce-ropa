@@ -1,5 +1,10 @@
+/**
+ * Controlador de Productos
+ * Funciones: getProducts, getProductById, createProduct, updateProduct, deleteProduct, getCategories
+ */
 const Product = require('../models/Product');
 
+// Lista productos con paginación, filtrado por categoría y búsqueda por keyword
 const getProducts = async (req, res) => {
   try {
     const pageSize = 12;
@@ -33,6 +38,7 @@ const getProducts = async (req, res) => {
   }
 };
 
+// Obtener producto por ID
 const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -46,6 +52,7 @@ const getProductById = async (req, res) => {
   }
 };
 
+// Crear nuevo producto (solo admin)
 const createProduct = async (req, res) => {
   try {
     const product = new Product({
@@ -67,6 +74,7 @@ const createProduct = async (req, res) => {
   }
 };
 
+// Actualizar producto (solo admin)
 const updateProduct = async (req, res) => {
   try {
     const { name, description, price, images, category, sizes, colors, brand, stock } =
@@ -95,6 +103,7 @@ const updateProduct = async (req, res) => {
   }
 };
 
+// Eliminar producto (solo admin)
 const deleteProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -109,6 +118,7 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+// Listar categorías disponibles
 const getCategories = async (req, res) => {
   try {
     const categories = [

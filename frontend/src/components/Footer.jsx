@@ -1,3 +1,7 @@
+/**
+ * Componente de pie de página
+ * Enlaces, información de contacto, copyright
+ */
 export default function Footer() {
   return (
     <footer className="bg-gray-800 text-white mt-auto">
